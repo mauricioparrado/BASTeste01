@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> Project Preview </title>
+    <script src="shared-config.js"></script>
+    <script src="https://ui5.sap.com/1.104.2/resources/sap-ui-core.js" 
+            id="sap-ui-bootstrap"
+            data-sap-ui-theme='sap_horizon' 
+            data-sap-ui-bindingSyntax="complex" 
+            data-sap-ui-xx-bindingSyntax="complex"
+            data-sap-ui-resourceroots='{"assets": "assets"}' 
+            data-sap-ui-libs="sap.m,sap.uxap,sap.ui.layout,sap.f">
+    </script>
+    <link rel="stylesheet" href="assets/preview.css">
+</head>
+
+<body id="body" class="sapUiBody">
+    <script>
+        "use strict";
+        sap.ui.localResources("assets");
+        (function (jQuery, App, Page) {
+            sap.ui.getCore().attachInit(function () {
+                sap.ui.define([
+                    "sap/ui/core/mvc/Controller",
+                    "sap/ui/model/json/JSONModel"
+                ], function (Controller, JSONModel) {
+                    return Controller.extend("PreviewController", {
+                        onInit: function () {
+
+                            const data = {"Services":[{"ServiceName":"Produto","DetailsURL":"./produto/","Metadata":"./produto/$metadata","Entities":[],"EntitiesCount":0},{"ServiceName":"TesteService","DetailsURL":"./service/Teste/","Metadata":"./service/Teste/$metadata","Entities":[{"Name":"OperadorEstrangeiro","URL":"./service/Teste/OperadorEstrangeiro","FioriURL":"$fiori-preview/TesteService/OperadorEstrangeiro#preview-app"},{"Name":"Produto","URL":"./service/Teste/Produto","FioriURL":"$fiori-preview/TesteService/Produto#preview-app"},{"Name":"IntegracaoSAP","URL":"./service/Teste/IntegracaoSAP","FioriURL":"$fiori-preview/TesteService/IntegracaoSAP#preview-app"},{"Name":"Parametros","URL":"./service/Teste/Parametros","FioriURL":"$fiori-preview/TesteService/Parametros#preview-app"},{"Name":"PUComex","URL":"./service/Teste/PUComex","FioriURL":"$fiori-preview/TesteService/PUComex#preview-app"},{"Name":"OperadorSituacao","URL":"./service/Teste/OperadorSituacao","FioriURL":"$fiori-preview/TesteService/OperadorSituacao#preview-app"},{"Name":"SituacaoTransmissao","URL":"./service/Teste/SituacaoTransmissao","FioriURL":"$fiori-preview/TesteService/SituacaoTransmissao#preview-app"},{"Name":"OperadorCodigos","URL":"./service/Teste/OperadorCodigos","FioriURL":"$fiori-preview/TesteService/OperadorCodigos#preview-app"},{"Name":"BusinessPartner","URL":"./service/Teste/BusinessPartner","FioriURL":"$fiori-preview/TesteService/BusinessPartner#preview-app"},{"Name":"Atributos","URL":"./service/Teste/Atributos","FioriURL":"$fiori-preview/TesteService/Atributos#preview-app"},{"Name":"ProdutoAtributo","URL":"./service/Teste/ProdutoAtributo","FioriURL":"$fiori-preview/TesteService/ProdutoAtributo#preview-app"},{"Name":"ProdutoSituacao","URL":"./service/Teste/ProdutoSituacao","FioriURL":"$fiori-preview/TesteService/ProdutoSituacao#preview-app"},{"Name":"ProdutoCodigos","URL":"./service/Teste/ProdutoCodigos","FioriURL":"$fiori-preview/TesteService/ProdutoCodigos#preview-app"},{"Name":"Material","URL":"./service/Teste/Material","FioriURL":"$fiori-preview/TesteService/Material#preview-app"},{"Name":"ProdutoOperador","URL":"./service/Teste/ProdutoOperador","FioriURL":"$fiori-preview/TesteService/ProdutoOperador#preview-app"},{"Name":"ProdutoRegimesEsp","URL":"./service/Teste/ProdutoRegimesEsp","FioriURL":"$fiori-preview/TesteService/ProdutoRegimesEsp#preview-app"}],"EntitiesCount":16}]}
+                            this.getView().setModel(new JSONModel(data));
+                        }
+                    });
+                });
+                var oApp = new App()
+                var previewView = sap.ui.view({
+                    viewName: "assets.Preview",
+                    type: sap.ui.core.mvc.ViewType.XML
+                });
+                oApp.addPage(new Page({
+                    content: [previewView],
+                    showHeader: false
+                })).placeAt("content");
+            });
+
+        }(jQuery, sap.m.App, sap.m.Page));
+    </script>
+    <div id="content"></div>
+</body>
+
+</html>

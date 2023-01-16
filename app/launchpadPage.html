@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{appTitle}}</title>
+
+        <script>
+            window["sap-ushell-config"] = {
+  "defaultRenderer": "fiori2",
+  "renderers": {
+    "fiori2": {
+      "componentData": {
+        "config": {
+          "enableSearch": false
+        }
+      }
+    }
+  },
+  "applications": {
+    "TesteAtributos-display": {
+      "title": "Atributos",
+      "description": "Atributos SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.Atributos/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.Atributos"
+    },
+    "TesteIntegracaoSAP-display": {
+      "title": "Dados Mestre SAP",
+      "description": "Catálogo - Dados Mestre SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.IntegracaoSAP/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.IntegracaoSAP"
+    },
+    "TesteOperadorEstrangeiro-display": {
+      "title": "Operador Estrangeiro",
+      "description": "Catálogo - Operador Estrangeiro SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.OperadorEstrangeiro/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.OperadorEstrangeiro"
+    },
+    "TestePUComex-display": {
+      "title": "PUComex",
+      "description": "Catálogo - PUComex SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.PUComex/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.PUComex"
+    },
+    "TesteParametrosGerais-display": {
+      "title": "Parametros Gerais",
+      "description": "Catálogo - Parametros Gerais SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.ParametrosGerais/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.ParametrosGerais"
+    },
+    "TesteProdutoCodigos-display": {
+      "title": "Produto Codigos",
+      "description": "Produto Codigos SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.ProdutoCodigos/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.ProdutoCodigos"
+    },
+    "TesteProdutos-display": {
+      "title": "Produtos",
+      "description": "Catálogo - Produtos SAP application",
+      "applicationType": "URL",
+      "navigationMode": "newWindowThenEmbedded",
+      "url": "./Teste.Produtos/webapp",
+      "additionalInformation": "SAPUI5.Component=Teste.Produtos"
+    }
+  }
+};
+        </script>
+        <link rel="stylesheet" href="assets/launchpad.css">
+        <script src="https://ui5.sap.com/1.104.2/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+        <script
+            src="https://ui5.sap.com/1.104.2/resources/sap-ui-core.js"
+            data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+            data-sap-ui-compatVersion="edge"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-frameOptions="allow"
+            data-sap-ui-bindingSyntax="complex"
+        ></script>
+        <script>
+            sap.ui.getCore().attachInit(function() {
+                sap.ushell.Container.createRenderer().placeAt('content');
+            });
+        </script>
+    </head>
+    <body class="sapUiBody" id="content"></body>
+</html>

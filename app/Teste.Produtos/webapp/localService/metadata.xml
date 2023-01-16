@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="TesteService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="OperadorEstrangeiro" EntityType="TesteService.OperadorEstrangeiro">
+                    <NavigationPropertyBinding Path="situacao" Target="OperadorSituacao"/>
+                    <NavigationPropertyBinding Path="situacaoTransmissao" Target="SituacaoTransmissao"/>
+                    <NavigationPropertyBinding Path="operadorCodigos" Target="OperadorCodigos"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="OperadorEstrangeiro"/>
+                </EntitySet>
+                <EntitySet Name="Produto" EntityType="TesteService.Produto">
+                    <NavigationPropertyBinding Path="produtoCodigos" Target="ProdutoCodigos"/>
+                    <NavigationPropertyBinding Path="situacao" Target="ProdutoSituacao"/>
+                    <NavigationPropertyBinding Path="situacaoTransmissao" Target="SituacaoTransmissao"/>
+                    <NavigationPropertyBinding Path="produtoAtributo" Target="ProdutoAtributo"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Produto"/>
+                </EntitySet>
+                <EntitySet Name="IntegracaoSAP" EntityType="TesteService.IntegracaoSAP"/>
+                <EntitySet Name="Parametros" EntityType="TesteService.Parametros">
+                    <NavigationPropertyBinding Path="Detalhes" Target="Parametros_Detalhes"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Parametros"/>
+                </EntitySet>
+                <EntitySet Name="PUComex" EntityType="TesteService.PUComex"/>
+                <EntitySet Name="OperadorSituacao" EntityType="TesteService.OperadorSituacao"/>
+                <EntitySet Name="SituacaoTransmissao" EntityType="TesteService.SituacaoTransmissao"/>
+                <EntitySet Name="OperadorCodigos" EntityType="TesteService.OperadorCodigos">
+                    <NavigationPropertyBinding Path="operadorEstrangeiro" Target="OperadorEstrangeiro"/>
+                    <NavigationPropertyBinding Path="businessPartner" Target="BusinessPartner"/>
+                </EntitySet>
+                <EntitySet Name="BusinessPartner" EntityType="TesteService.BusinessPartner"/>
+                <EntitySet Name="Atributos" EntityType="TesteService.Atributos"/>
+                <EntitySet Name="ProdutoAtributo" EntityType="TesteService.ProdutoAtributo">
+                    <NavigationPropertyBinding Path="produto" Target="Produto"/>
+                    <NavigationPropertyBinding Path="atributo" Target="Atributos"/>
+                </EntitySet>
+                <EntitySet Name="ProdutoSituacao" EntityType="TesteService.ProdutoSituacao"/>
+                <EntitySet Name="ProdutoCodigos" EntityType="TesteService.ProdutoCodigos">
+                    <NavigationPropertyBinding Path="produto" Target="Produto"/>
+                    <NavigationPropertyBinding Path="product" Target="Material"/>
+                </EntitySet>
+                <EntitySet Name="Material" EntityType="TesteService.Material"/>
+                <EntitySet Name="Parametros_Detalhes" EntityType="TesteService.Parametros_Detalhes">
+                    <NavigationPropertyBinding Path="up_" Target="Parametros"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Parametros_Detalhes"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="OperadorEstrangeiro">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="seq" Type="Edm.Int32"/>
+                <Property Name="cpfCnpjRaiz" Type="Edm.String" MaxLength="11"/>
+                <Property Name="tin" Type="Edm.String" MaxLength="35"/>
+                <Property Name="versao" Type="Edm.String" MaxLength="8"/>
+                <Property Name="nome" Type="Edm.String" MaxLength="70"/>
+                <Property Name="logradouro" Type="Edm.String" MaxLength="70"/>
+                <Property Name="nomeCidade" Type="Edm.String" MaxLength="35"/>
+                <Property Name="codigoSubdivisaoPais" Type="Edm.String" MaxLength="6"/>
+                <Property Name="codigoPais" Type="Edm.String" MaxLength="2"/>
+                <Property Name="cep" Type="Edm.String" MaxLength="9"/>
+                <Property Name="email" Type="Edm.String" MaxLength="70"/>
+                <Property Name="dataReferencia" Type="Edm.Date"/>
+                <NavigationProperty Name="situacao" Type="TesteService.OperadorSituacao">
+                    <ReferentialConstraint Property="situacao_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="situacao_ID" Type="Edm.String"/>
+                <NavigationProperty Name="situacaoTransmissao" Type="TesteService.SituacaoTransmissao">
+                    <ReferentialConstraint Property="situacaoTransmissao_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="situacaoTransmissao_ID" Type="Edm.String"/>
+                <NavigationProperty Name="operadorCodigos" Type="Collection(TesteService.OperadorCodigos)" Partner="operadorEstrangeiro"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="TesteService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="TesteService.OperadorEstrangeiro"/>
+            </EntityType>
+            <EntityType Name="Produto">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="codigo" Type="Edm.String" MaxLength="10"/>
+                <Property Name="descricao" Type="Edm.String" MaxLength="3700"/>
+                <Property Name="denominacao" Type="Edm.String" MaxLength="100"/>
+                <Property Name="cpfCnpjRaiz" Type="Edm.String" MaxLength="11"/>
+                <Property Name="ncm" Type="Edm.String" MaxLength="8"/>
+                <Property Name="versao" Type="Edm.String" MaxLength="8"/>
+                <NavigationProperty Name="produtoCodigos" Type="Collection(TesteService.ProdutoCodigos)" Partner="produto"/>
+                <NavigationProperty Name="situacao" Type="TesteService.ProdutoSituacao">
+                    <ReferentialConstraint Property="situacao_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="situacao_ID" Type="Edm.String"/>
+                <NavigationProperty Name="situacaoTransmissao" Type="TesteService.SituacaoTransmissao">
+                    <ReferentialConstraint Property="situacaoTransmissao_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="situacaoTransmissao_ID" Type="Edm.String"/>
+                <NavigationProperty Name="produtoAtributo" Type="Collection(TesteService.ProdutoAtributo)" Partner="produto"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="TesteService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="TesteService.Produto"/>
+            </EntityType>
+            <EntityType Name="IntegracaoSAP">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="descricao" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Parametros">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="codigo" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="Detalhes" Type="Collection(TesteService.Parametros_Detalhes)" Partner="up_">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="TesteService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="TesteService.Parametros"/>
+            </EntityType>
+            <EntityType Name="PUComex">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="codigo" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="OperadorSituacao">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="descricao" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="SituacaoTransmissao">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="descricao" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="OperadorCodigos">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="codigo" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="operadorEstrangeiro" Type="TesteService.OperadorEstrangeiro" Partner="operadorCodigos">
+                    <ReferentialConstraint Property="operadorEstrangeiro_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="operadorEstrangeiro_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="businessPartner" Type="TesteService.BusinessPartner">
+                    <ReferentialConstraint Property="businessPartner_BusinessPartnerKey" ReferencedProperty="BusinessPartnerKey"/>
+                </NavigationProperty>
+                <Property Name="businessPartner_BusinessPartnerKey" Type="Edm.String" MaxLength="32"/>
+            </EntityType>
+            <EntityType Name="BusinessPartner">
+                <Key>
+                    <PropertyRef Name="BusinessPartnerKey"/>
+                </Key>
+                <Property Name="BusinessPartnerKey" Type="Edm.String" MaxLength="32" Nullable="false"/>
+                <Property Name="Address_Street" Type="Edm.String" MaxLength="60"/>
+                <Property Name="Address_City" Type="Edm.String" MaxLength="40"/>
+                <Property Name="Address_AddressTypeCode" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Address_PostalCode" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Address_CountryText" Type="Edm.String" MaxLength="60"/>
+                <Property Name="Address_Building" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Address_AddressTypeText" Type="Edm.String" MaxLength="60"/>
+                <Property Name="Address_CountryCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Address_AddressKey" Type="Edm.String" MaxLength="32"/>
+                <Property Name="BusinessPartnerID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Company" Type="Edm.String" MaxLength="80"/>
+                <Property Name="CurrencyText" Type="Edm.String" MaxLength="60"/>
+                <Property Name="WebAddress" Type="Edm.String" MaxLength="60"/>
+            </EntityType>
+            <EntityType Name="Atributos">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="nome" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ncm" Type="Edm.String" MaxLength="100"/>
+                <Property Name="codigo" Type="Edm.String" MaxLength="100"/>
+                <Property Name="orgao" Type="Edm.String" MaxLength="100"/>
+                <Property Name="inicioVigencia" Type="Edm.Date"/>
+                <Property Name="fimVigencia" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ProdutoAtributo">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="produto" Type="TesteService.Produto" Partner="produtoAtributo">
+                    <ReferentialConstraint Property="produto_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="produto_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="atributo" Type="TesteService.Atributos">
+                    <ReferentialConstraint Property="atributo_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="atributo_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="ProdutoSituacao">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="descricao" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="ProdutoCodigos">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="codigo" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="produto" Type="TesteService.Produto" Partner="produtoCodigos">
+                    <ReferentialConstraint Property="produto_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="produto_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="product" Type="TesteService.Material">
+                    <ReferentialConstraint Property="product_ProductKey" ReferencedProperty="ProductKey"/>
+                </NavigationProperty>
+                <Property Name="product_ProductKey" Type="Edm.String" MaxLength="32"/>
+            </EntityType>
+            <EntityType Name="Material">
+                <Key>
+                    <PropertyRef Name="ProductKey"/>
+                </Key>
+                <Property Name="ProductKey" Type="Edm.String" MaxLength="32" Nullable="false"/>
+                <Property Name="ProductName" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="TaxTariffText" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ProductID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DimensionUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="WeightUnitText" Type="Edm.String" MaxLength="255"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Scale="2" Precision="15"/>
+                <Property Name="WeightMeasure" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="ProductWidth" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="DimensionUnitText" Type="Edm.String" MaxLength="255"/>
+                <Property Name="SupplierID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ProductDescription" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ProductCategory" Type="Edm.String" MaxLength="40"/>
+                <Property Name="TaxTariffCode" Type="Edm.Byte"/>
+                <Property Name="QuantityUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ProductTypeCode" Type="Edm.String" MaxLength="2"/>
+                <Property Name="QuantityUnitText" Type="Edm.String" MaxLength="255"/>
+                <Property Name="WeightUnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SupplierName" Type="Edm.String" MaxLength="80"/>
+                <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5"/>
+                <Property Name="ProductHeight" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="CurrencyText" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ProductDepth" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="SupplierGuid" Type="Edm.String" MaxLength="32"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Parametros_Detalhes">
+                <Key>
+                    <PropertyRef Name="up__ID"/>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <NavigationProperty Name="up_" Type="TesteService.Parametros" Nullable="false" Partner="Detalhes">
+                    <ReferentialConstraint Property="up__ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="up__ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="tipo" Type="Edm.String"/>
+                <Property Name="descricao" Type="Edm.String"/>
+                <Property Name="valor" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="TesteService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="TesteService.Parametros_Detalhes"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.OperadorEstrangeiro"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="TesteService.OperadorEstrangeiro"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Produto"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="TesteService.Produto"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Parametros"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="TesteService.Parametros"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Parametros_Detalhes"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="TesteService.Parametros_Detalhes"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.OperadorEstrangeiro"/>
+                <ReturnType Type="TesteService.OperadorEstrangeiro"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Produto"/>
+                <ReturnType Type="TesteService.Produto"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Parametros"/>
+                <ReturnType Type="TesteService.Parametros"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.OperadorEstrangeiro"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="TesteService.OperadorEstrangeiro"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Produto"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="TesteService.Produto"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="TesteService.Parametros"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="TesteService.Parametros"/>
+            </Action>
+            <Annotations Target="TesteService.EntityContainer/OperadorEstrangeiro">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="TesteService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="TesteService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="TesteService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TesteService.OperadorEstrangeiro/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.OperadorEstrangeiro/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.OperadorEstrangeiro/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.OperadorEstrangeiro/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.OperadorEstrangeiro/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.EntityContainer/Produto">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="TesteService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="TesteService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="TesteService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TesteService.Produto/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Produto/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Produto/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Produto/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Produto/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.IntegracaoSAP/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.EntityContainer/Parametros">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="TesteService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="TesteService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="TesteService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TesteService.Parametros/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Parametros/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Parametros/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Parametros/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Parametros/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.PUComex/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.OperadorCodigos/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.Atributos/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.ProdutoAtributo/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.ProdutoCodigos/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="TesteService.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                </Annotations>
+                <Annotations Target="TesteService.DraftAdministrativeData/DraftUUID">
+                    <Annotation Term="UI.Hidden" Bool="true"/>
+                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                    </Annotations>
+                    <Annotations Target="TesteService.DraftAdministrativeData/CreationDateTime">
+                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                        </Annotations>
+                        <Annotations Target="TesteService.DraftAdministrativeData/CreatedByUser">
+                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                            </Annotations>
+                            <Annotations Target="TesteService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                </Annotations>
+                                <Annotations Target="TesteService.DraftAdministrativeData/LastChangeDateTime">
+                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                    </Annotations>
+                                    <Annotations Target="TesteService.DraftAdministrativeData/LastChangedByUser">
+                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                        </Annotations>
+                                        <Annotations Target="TesteService.DraftAdministrativeData/InProcessByUser">
+                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                            </Annotations>
+                                            <Annotations Target="TesteService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                </Annotations>
+                                                <Annotations Target="TesteService.EntityContainer/Parametros_Detalhes">
+                                                    <Annotation Term="Common.DraftNode">
+                                                        <Record Type="Common.DraftNodeType">
+                                                            <PropertyValue Property="PreparationAction" String="TesteService.draftPrepare"/>
+                                                        </Record>
+                                                    </Annotation>
+                                                </Annotations>
+                                                <Annotations Target="TesteService.Parametros_Detalhes/IsActiveEntity">
+                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations Target="TesteService.Parametros_Detalhes/HasActiveEntity">
+                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations Target="TesteService.Parametros_Detalhes/HasDraftEntity">
+                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                                <Annotations Target="TesteService.Parametros_Detalhes/DraftAdministrativeData">
+                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                </Annotations>
+                                            </Schema>
+                                        </edmx:DataServices>
+                                    </edmx:Edmx>

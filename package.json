@@ -1,0 +1,115 @@
+{
+  "name": "Teste",
+  "version": "1.0.0",
+  "description": "Teste",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^2.11.0",
+    "@sap-cloud-sdk/util": "^2.11.0",
+    "@sap/cds": "^6",
+    "@sap/low-code-event-handler": "^1.1.1",
+    "@sap/xsenv": "^3.4.0",
+    "@sap/xssec": "^3.2.14",
+    "express": "^4",
+    "hdb": "^0.19.5",
+    "passport": "^0.6.0"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.102.12",
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch-Teste.Produtos": "cds watch --open Teste.Produtos/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.IntegracaoSAP": "cds watch --open Teste.IntegracaoSAP/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.ParametrosGerais": "cds watch --open Teste.ParametrosGerais/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.PUComex": "cds watch --open Teste.PUComex/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.OperadorEstrangeiro": "cds watch --open Teste.OperadorEstrangeiro/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.Produto": "cds watch --open Teste.Produto/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.ProdutosCodigos": "cds watch --open Teste.ProdutosCodigos/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.ProdutosCodigosSAP": "cds watch --open Teste.ProdutosCodigosSAP/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.ProdutoCodigos": "cds watch --open Teste.ProdutoCodigos/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-Teste.Atributos": "cds watch --open Teste.Atributos/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "engines": {
+    "node": "^16.15"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": {
+          "kind": "hana-cloud"
+        }
+      },
+      "db": {
+        "kind": "sql"
+      },
+      "app-service": {
+        "impl": "@sap/low-code-event-handler"
+      },
+      "auth": {
+        "kind": "xsuaa"
+      },
+      "ZGWDEMO": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZGWDEMO",
+        "[production]": {
+          "credentials": {
+            "destination": "ES5",
+            "path": "/sap/opu/odata/iwbep/GWDEMO"
+          }
+        }
+      }
+    }
+  },
+  "lcap": true,
+  "sapux": [
+    "app/Teste.CatalogoProdutos",
+    "app/Teste.Produtos",
+    "app/Teste.OperadorEstrangeiro",
+    "app/Teste.IntegracaoSAP",
+    "app/Teste.ParametrosGerais",
+    "app/Teste.PUComex",
+    "app/Teste.OperadorEstrangeiro",
+    "app/Teste.ParametrosGerais",
+    "app/Teste.ParametrosGerais",
+    "app/Teste.Produto",
+    "app/Teste.Produtos",
+    "app/Teste.ProdutosCodigos",
+    "app/Teste.ProdutosCodigosSAP",
+    "app/Teste.ProdutoCodigos",
+    "app/Teste.ProdutoCodigos",
+    "app/Teste.ParametrosGerais",
+    "app/Teste.ParametrosGerais",
+    "app/Teste.PUComex",
+    "app/Teste.Atributos",
+    "app/Teste.IntegracaoSAP"
+  ]
+}
